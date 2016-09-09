@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LifeBoxApp</string>
+    
+	<string-array name="split_files">
+<item>10 Minutes</item>
+</string-array>
+
+<string-array name="recording_quality">
+<item>Default</item>
+</string-array>
+
+<string-array name="upload_to">
+<item>Dropbox</item>
+</string-array>
+	
+</resources>
