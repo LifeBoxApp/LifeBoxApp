@@ -5,8 +5,10 @@ import java.io.File;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -61,8 +63,6 @@ public class LifeBoxAppMain extends Activity {
 	protected ConnectivityManager connManager;
 	protected NetworkInfo mWifi;
 
-	//private RecordingServiceBroadcastReceiver intentReceiver = new RecordingServiceBroadcastReceiver();
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -70,6 +70,26 @@ public class LifeBoxAppMain extends Activity {
 
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main);
+
+        final SharedPreferences settings = getSharedPreferences(ACCOUNT_PREFS_NAME, 0);
+
+        if (!settings.getBoolean("UsageAgreementAccepted", false)) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("Before using LifeBoxApp you must agree to comply with your local laws regarding the recording of other people. In some places it is illegal to record other people without their consent.")
+					.setCancelable(false)
+					.setPositiveButton("Agree", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							settings.edit().putBoolean("UsageAgreementAccepted",true).commit();
+						}
+					})
+					.setNegativeButton("Disagree", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							System.exit(0);
+						}
+					});
+			AlertDialog alert = builder.create();
+			alert.show();
+        }
 
 		mDBApi = new DropboxAPI<AndroidAuthSession>(buildSession());
 		_pathFolder = getExternalFilesDir(null).toString();
@@ -125,7 +145,7 @@ public class LifeBoxAppMain extends Activity {
 
 		mAbout.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				String url = "https://clintidau.github.io/LifeBoxApp/";
+				String url = "http://lifeboxapp.com";
 				Intent i = new Intent(Intent.ACTION_VIEW);
 				i.setData(Uri.parse(url));
 				startActivity(i);
@@ -195,11 +215,6 @@ public class LifeBoxAppMain extends Activity {
 
 	@Override
 	protected void onStop() {
-		/*try {
-			unregisterReceiver(intentReceiver);
-		}
-        catch (Exception e) {e.printStackTrace();}
-		*/
 		super.onStop();
 	}
 
