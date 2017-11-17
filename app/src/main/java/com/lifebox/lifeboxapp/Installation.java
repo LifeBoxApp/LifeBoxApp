@@ -1,5 +1,3 @@
-// http://android-developers.blogspot.com.au/2011/03/identifying-app-installations.html
-
 package com.lifebox.lifeboxapp;
 
 import java.io.File;
@@ -10,12 +8,12 @@ import java.util.UUID;
 
 import android.content.Context;
 
-public class Installation {
+class Installation {
     private static String sID = null;
     private static final String INSTALLATION = "INSTALLATION";
 
     public synchronized static String id(Context context) {
-        if (sID == null) {  
+        if (sID == null) {
             File installation = new File(context.getFilesDir(), INSTALLATION);
             try {
                 if (!installation.exists())

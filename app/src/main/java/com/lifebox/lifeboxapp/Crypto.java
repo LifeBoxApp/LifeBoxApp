@@ -7,10 +7,10 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-public class Crypto {
-    private byte[] keyBytes;
+class Crypto {
+    private final byte[] keyBytes;
 
-    public Crypto(String key) throws Exception {
+    public Crypto(String key) {
         keyBytes = Base64ToByte(key);
     }
 
@@ -19,10 +19,10 @@ public class Crypto {
         return cipher.doFinal(plainText);
     }
 
-    public byte[] decrypt(byte[] encrypted) throws Exception {
-        Cipher cipher = getCipher(Cipher.DECRYPT_MODE);
-        return cipher.doFinal(encrypted);
-    }
+//    public byte[] decrypt(byte[] encrypted) throws Exception {
+//        Cipher cipher = getCipher(Cipher.DECRYPT_MODE);
+//        return cipher.doFinal(encrypted);
+//    }
 
     private Cipher getCipher(int cipherMode) throws Exception {
         String encryptionAlgorithm = "AES";
@@ -40,11 +40,11 @@ public class Crypto {
         return ByteToBase64(key);
     }
 
-    public static String ByteToBase64(byte[] input) {
+    private static String ByteToBase64(byte[] input) {
         return Base64.encodeToString(input, Base64.DEFAULT);
     }
 
-    public static byte[] Base64ToByte(String input) {
+    private static byte[] Base64ToByte(String input) {
         return Base64.decode(input, Base64.DEFAULT);
     }
 }

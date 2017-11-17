@@ -37,6 +37,56 @@
             android:layout_height="wrap_content"
             android:text="Encrypt uploads with a password" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" " />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload to..." />
+
+    <RadioGroup
+        android:id="@+id/radioGroupCloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radioButtonDropbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dropbox"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" " />
+
+        <RadioButton
+            android:id="@+id/radioButtonOnedrive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Onedrive"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" " />
+
+        <RadioButton
+            android:id="@+id/radioButtonBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Box"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" " />
+    </RadioGroup>
+
+
     </LinearLayout>
 
 </ScrollView>
